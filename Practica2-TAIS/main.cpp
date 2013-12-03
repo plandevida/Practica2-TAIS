@@ -11,16 +11,32 @@
 #include "SplitString.h"
 #include "GrafoNombres.h"
 
-void gradoSeparacion(const string& origen) {
+void gradoSeparacion(string& origen) {
     
     GrafoNombres pelis("movies.txt", "/");
+    
+    
+    std::cout << "Escriba el nombre del actor: ";
+    
+    std::cin >> origen;
+    
+    std::cout << endl;
+    
+    while ( origen != "" ) {
+        
+        std::cout << "Escriba el nombre del actor: ";
+        
+        std::cin >> origen;
+        
+        std::cout << endl;
+    }
     
 }
 
 int main(int argc, const char * argv[])
 {
     
-    string nombreOrigen = "MacIntyre Dixon";
+    string nombreOrigen = "";
 
     gradoSeparacion(nombreOrigen);
     

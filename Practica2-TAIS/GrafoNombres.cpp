@@ -7,11 +7,10 @@
 //
 
 #include <iostream>
+#include <string>
 
 #include "Tabla.h"
 #include "Grafo.h"
-
-using namespace std;
 
 class GrafoNombres {
 
@@ -22,12 +21,58 @@ private:
     Grafo* _G;               // grafo con vértices numerados
     
 public:
-    GrafoNombres(string filename, string delimiter);
+    GrafoNombres(string filename, string delimiter) {
+        
+        read(filename);
+        
+//        int numeroVertices = 0;
+//        
+//        for ( int i = 1; i < numeroVertices; i++) {
+//            string cadena = "";
+//            
+//            tn.inserta(cadena, i);
+//        }
+    }
     
-    ~GrafoNombres();
+    ~GrafoNombres() {
+        delete _G;
+        delete nombres;
+    }
     
-    bool contiene(string s) const; // existe un vértice de nombre s?
-    int indice(string s) const; // devuelve el número asociado al vértices
-    const string& nombre(int v) const; // devuelve el nombre asociado al número v
-    const Grafo& G() const; // devuelve el grafo de números
+    bool contiene(string s) const {
+        
+        return tn.esta(s);
+    }
+    
+    int indice(string s) const {
+        
+        return tn.consulta(s);
+    }
+    
+    const string& nombre(int v) const {
+        
+        return nombres[v];
+    }
+    
+    const Grafo& G() const {
+        
+        return NULL;
+    }
+    
+    string read(const string& file) {
+        
+        string cadenaLeida = "";
+        
+        ifstream inputFile;
+        inputFile.open(file);
+        
+        if ( inputFile.is_open() )  {
+            
+            while ( getline(inputFile, cadenaLeida) ) { std::cout << cadenaLeida << std::endl; }
+            
+            inputFile.close();
+        }
+        
+        return cadenaLeida;
+    }
 };
