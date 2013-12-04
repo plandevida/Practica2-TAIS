@@ -9,36 +9,42 @@
 #include <iostream>
 #include <string>
 
-//#include "SplitString.h"
-//#include "GrafoNombres.h"
+#include "GrafoNombres.h"
 
 using namespace std;
 
+const bool MANUAL_DEBUG = false;
+
 void gradoSeparacion(string& origen) {
     
-//    GrafoNombres pelis("movies.txt", "/");
+    GrafoNombres pelis("movies.txt", "/");
     
     
     cout << "Escriba el nombre del actor: ";
     
-    cin >> origen;
+    getline(cin, origen);
     
-    cout << "DEBUG --> " << origen;
+    if ( MANUAL_DEBUG ) cout << "DEBUG --> " << origen;
     
     cout << endl;
     
-    while ( origen != "" ) {
+    while ( origen != "" && origen != "q" ) {
         
         cout << "Escriba el nombre del actor: ";
         
-        cin >> origen;
+        getline(cin, origen);
     
-        cout << "DEBUG --> " << origen;
+        if ( MANUAL_DEBUG ) {
+            
+            cout << "DEBUG --> " << origen;
+            
+            cout << " origen != \"\" : " << (origen != "") << " o " << " origen != \"q\" " << (origen != "q") << endl;
+        }
         
         cout << endl;
     }
     
-    cout << "fuera del bucle";
+    if ( MANUAL_DEBUG ) cout << "fuera del bucle" << endl;
     
 }
 
@@ -51,4 +57,3 @@ int main(int argc, const char * argv[])
     
     return 0;
 }
-

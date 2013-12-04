@@ -5,19 +5,11 @@
 //  Created by Daniel Serrano Torres on 03/12/13.
 //  Copyright (c) 2013 zombies-software. All rights reserved.
 //
+
 #include "GrafoNombres.h"
 
 using namespace std;
 
-//class GrafoNombres {
-//
-//private:
-//    
-//    Tabla<string, uint> tn;  // string -> index
-//    string* nombres;         // index  -> string
-//    Grafo* _G;               // grafo con vértices numerados
-    
-//public:
     GrafoNombres::GrafoNombres(string filename, string delimiter) {
         
         read(filename);
@@ -61,15 +53,14 @@ using namespace std;
         string cadenaLeida = "";
         
         ifstream inputFile;
-        inputFile.open(file );
+        inputFile.open( file );
         
         if ( inputFile.is_open() )  {
             
-            while ( getline(inputFile, cadenaLeida) ) { std::cout << cadenaLeida << std::endl; }
+        while ( getline(inputFile, cadenaLeida) ) { std::cout << cadenaLeida << std::endl; }
             
             inputFile.close();
         }
         
         return cadenaLeida;
     }
-//};
