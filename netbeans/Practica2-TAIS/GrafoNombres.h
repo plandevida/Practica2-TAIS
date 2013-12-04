@@ -15,7 +15,14 @@
 #include "Tabla.h"
 #include "Grafo.h"
 
+using namespace std;
+
 class GrafoNombres {
+    
+private:
+    Tabla<string, uint> tn;  // string -> index
+    string* nombres;         // index  -> string
+    Grafo* _G;               // grafo con vértices numerados
     
 public:
     GrafoNombres(string filename, string delimiter);
@@ -27,6 +34,8 @@ public:
     const string& nombre(int v) const;  // devuelve el nombre asociado al número v
     const Grafo& G() const;             // devuelve el grafo de números
     
+private:
+    string read(const string& file);
 };
 
 #endif /* defined(GrafoNombres_H_) */

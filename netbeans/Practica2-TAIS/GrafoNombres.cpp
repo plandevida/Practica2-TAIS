@@ -7,16 +7,18 @@
 //
 #include "GrafoNombres.h"
 
-class GrafoNombres {
+using namespace std;
 
-private:
+//class GrafoNombres {
+//
+//private:
+//    
+//    Tabla<string, uint> tn;  // string -> index
+//    string* nombres;         // index  -> string
+//    Grafo* _G;               // grafo con vértices numerados
     
-    Tabla<string, uint> tn;  // string -> index
-    string* nombres;         // index  -> string
-    Grafo* _G;               // grafo con vértices numerados
-    
-public:
-    GrafoNombres(string filename, string delimiter) {
+//public:
+    GrafoNombres::GrafoNombres(string filename, string delimiter) {
         
         read(filename);
         
@@ -29,22 +31,22 @@ public:
 //        }
     }
     
-    ~GrafoNombres() {
+    GrafoNombres::~GrafoNombres() {
         delete _G;
         delete nombres;
     }
     
-    bool contiene(string s) const {
+    bool GrafoNombres::contiene(string s) const {
         
         return tn.esta(s);
     }
     
-    int indice(string s) const {
+    int GrafoNombres::indice(string s) const {
         
         return tn.consulta(s);
     }
     
-    const string& nombre(int v) const {
+    const string& GrafoNombres::nombre(int v) const {
         
         return nombres[v];
     }
@@ -54,7 +56,7 @@ public:
 //        return Grafo(0,0);
 //    }
     
-    string read(const string& file) {
+    string GrafoNombres::read(const string& file) {
         
         string cadenaLeida = "";
         
@@ -70,4 +72,4 @@ public:
         
         return cadenaLeida;
     }
-};
+//};

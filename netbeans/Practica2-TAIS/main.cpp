@@ -7,29 +7,34 @@
 //
 
 #include <iostream>
+#include <string>
 
-#include "SplitString.h"
-#include "GrafoNombres.h"
+//#include "SplitString.h"
+//#include "GrafoNombres.h"
+
+using namespace std;
 
 void gradoSeparacion(string& origen) {
     
 //    GrafoNombres pelis("movies.txt", "/");
     
     
-    std::cout << "Escriba el nombre del actor: ";
+    cout << "Escriba el nombre del actor: ";
     
-    std::cin >> origen;
+    cin >> origen;
     
-    std::cout << endl;
+    cout << endl;
     
     while ( origen != "" ) {
         
-        std::cout << "Escriba el nombre del actor: ";
+        cout << "Escriba el nombre del actor: ";
         
-        std::cin >> origen;
+        cin >> origen;
         
-        std::cout << endl;
+        cout << endl;
     }
+    
+    cout << "fuera del bucle";
     
 }
 
