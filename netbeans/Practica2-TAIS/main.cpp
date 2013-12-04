@@ -23,6 +23,8 @@ void gradoSeparacion(string& origen) {
     
     cin >> origen;
     
+    cout << "DEBUG --> " << origen;
+    
     cout << endl;
     
     while ( origen != "" ) {
@@ -30,6 +32,8 @@ void gradoSeparacion(string& origen) {
         cout << "Escriba el nombre del actor: ";
         
         cin >> origen;
+    
+        cout << "DEBUG --> " << origen;
         
         cout << endl;
     }
