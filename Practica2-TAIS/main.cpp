@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include <string>
+//#include <string>
 
 #include "GrafoNombres.h"
 

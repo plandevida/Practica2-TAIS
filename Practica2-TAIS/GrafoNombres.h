@@ -9,11 +9,8 @@
 #ifndef GRAFONOMBRES_H_
 #define GRAFONOMBRES_H_
 
-#ifndef IOSTREAM_STRING_
-#define IOSTREAM_STRING_
 #include <iostream>
-#include <string>
-#endif //IOSTREAM_STRING_
+//#include <string>
 
 #include "Tabla.h"
 #include "Grafo.h"
