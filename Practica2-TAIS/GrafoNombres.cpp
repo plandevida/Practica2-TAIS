@@ -5,23 +5,20 @@
 //  Created by Daniel Serrano Torres on 03/12/13.
 //  Copyright (c) 2013 zombies-software. All rights reserved.
 //
+#include "GrafoNombres.h"
 
-#include <iostream>
-#include <string>
+using namespace std;
 
-#include "Tabla.h"
-#include "Grafo.h"
-
-class GrafoNombres {
-
-private:
+//class GrafoNombres {
+//
+//private:
+//    
+//    Tabla<string, uint> tn;  // string -> index
+//    string* nombres;         // index  -> string
+//    Grafo* _G;               // grafo con vértices numerados
     
-    Tabla<string, uint> tn;  // string -> index
-    string* nombres;         // index  -> string
-    Grafo* _G;               // grafo con vértices numerados
-    
-public:
-    GrafoNombres(string filename, string delimiter) {
+//public:
+    GrafoNombres::GrafoNombres(string filename, string delimiter) {
         
         read(filename);
         
@@ -34,37 +31,37 @@ public:
 //        }
     }
     
-    ~GrafoNombres() {
+    GrafoNombres::~GrafoNombres() {
         delete _G;
         delete nombres;
     }
     
-    bool contiene(string s) const {
+    bool GrafoNombres::contiene(string s) const {
         
         return tn.esta(s);
     }
     
-    int indice(string s) const {
+    int GrafoNombres::indice(string s) const {
         
         return tn.consulta(s);
     }
     
-    const string& nombre(int v) const {
+    const string& GrafoNombres::nombre(int v) const {
         
         return nombres[v];
     }
     
-    const Grafo& G() const {
-        
-        return Grafo(0,0);
-    }
+//    const Grafo& G() const {
+//        
+//        return Grafo(0,0);
+//    }
     
-    string read(const std::string& file) {
+    string GrafoNombres::read(const string& file) {
         
         string cadenaLeida = "";
         
         ifstream inputFile;
-        inputFile.open( (char*)file );
+        inputFile.open(file );
         
         if ( inputFile.is_open() )  {
             
@@ -75,4 +72,4 @@ public:
         
         return cadenaLeida;
     }
-};
+//};

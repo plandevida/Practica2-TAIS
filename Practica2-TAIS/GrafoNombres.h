@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 zombies-software. All rights reserved.
 //
 
-#ifndef __Practica2_TAIS__GrafoNombres__
-#define __Practica2_TAIS__GrafoNombres__
+#ifndef GRAFONOMBRES_H_
+#define GRAFONOMBRES_H_
 
 #include <iostream>
 #include <string>
@@ -15,7 +15,14 @@
 #include "Tabla.h"
 #include "Grafo.h"
 
+using namespace std;
+
 class GrafoNombres {
+    
+private:
+    Tabla<string, uint> tn;  // string -> index
+    string* nombres;         // index  -> string
+    Grafo* _G;               // grafo con vértices numerados
     
 public:
     GrafoNombres(string filename, string delimiter);
@@ -27,6 +34,8 @@ public:
     const string& nombre(int v) const;  // devuelve el nombre asociado al número v
     const Grafo& G() const;             // devuelve el grafo de números
     
+private:
+    string read(const string& file);
 };
 
-#endif /* defined(__Practica2_TAIS__GrafoNombres__) */
+#endif /* defined(GrafoNombres_H_) */
