@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 zombies-software. All rights reserved.
 //
 
-#ifndef __Practica2_TAIS__GrafoNombres__
-#define __Practica2_TAIS__GrafoNombres__
+#ifndef GRAFONOMBRES_H_
+#define GRAFONOMBRES_H_
 
 #include <iostream>
 #include <string>
@@ -29,4 +29,4 @@ public:
     
 };
 
-#endif /* defined(__Practica2_TAIS__GrafoNombres__) */
+#endif /* defined(GrafoNombres_H_) */

@@ -11,3 +11,5 @@
 *.lai
 *.la
 *.a
+/netbeans/Practica2-TAIS/build/
+/netbeans/Practica2-TAIS/dist/

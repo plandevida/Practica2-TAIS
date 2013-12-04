@@ -5,12 +5,7 @@
 //  Created by Daniel Serrano Torres on 03/12/13.
 //  Copyright (c) 2013 zombies-software. All rights reserved.
 //
-
-#include <iostream>
-#include <string>
-
-#include "Tabla.h"
-#include "Grafo.h"
+#include "GrafoNombres.h"
 
 class GrafoNombres {
 
@@ -54,17 +49,17 @@ public:
         return nombres[v];
     }
     
-    const Grafo& G() const {
-        
-        return Grafo(0,0);
-    }
+//    const Grafo& G() const {
+//        
+//        return Grafo(0,0);
+//    }
     
-    string read(const std::string& file) {
+    string read(const string& file) {
         
         string cadenaLeida = "";
         
         ifstream inputFile;
-        inputFile.open( (char*)file );
+        inputFile.open(file );
         
         if ( inputFile.is_open() )  {
             
