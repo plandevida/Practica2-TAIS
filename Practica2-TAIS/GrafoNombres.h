@@ -10,7 +10,7 @@
 #define GRAFONOMBRES_H_
 
 #include <iostream>
-//#include <string>
+#include <string>
 
 #include "Tabla.h"
 #include "Grafo.h"
@@ -25,51 +25,19 @@ private:
     Grafo* _G;               // grafo con vértices numerados
     
 public:
-    GrafoNombres(string filename, string delimiter) {
-        
-        read(filename);
-    }
+    GrafoNombres(string filename, string delimiter);
     
-    ~GrafoNombres(){
-        delete _G;
-        delete nombres;
-    }
+    ~GrafoNombres();
     
-    bool contiene(string s) const{      // existe un vértice de nombre s?
-        
-        return tn.esta(s);
-    }
+    bool contiene(string s) const;      // existe un vértice de nombre s?
     
-    int indice(string s) const {        // devuelve el número asociado al vértices
-        
-        return tn.consulta(s);
-    }
+    int indice(string s) const;        // devuelve el número asociado al vértices
     
-    const string& nombre(int v) const {  // devuelve el nombre asociado al número v
-        
-        return nombres[v];
-    }
+    const string& nombre(int v) const;  // devuelve el nombre asociado al número v
     
-    const Grafo& G() const {             // devuelve el grafo de números
-        return NULL;
-    }
+    const Grafo& G() const;             // devuelve el grafo de números
     
-private:
-    string read(const string& file) {
-        
-        string cadenaLeida = "";
-        
-        ifstream inputFile;
-        inputFile.open( file );
-        
-        if ( inputFile.is_open() )  {
-        
-        while ( getline(inputFile, cadenaLeida) ) { std::cout << cadenaLeida << std::endl; }
-        
-            inputFile.close();
-        }
-        return cadenaLeida;
-    }
+    string read(const string& file);
 };
 
 #endif /* defined(GrafoNombres_H_) */

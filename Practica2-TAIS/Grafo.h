@@ -146,7 +146,7 @@ private:
  * Para mostrar grafos por la salida estándar.
  */
 
-ostream& operator<<(ostream& o,const Grafo& g){
+inline ostream& operator<<(ostream& o,const Grafo& g){
 	g.mostrar(o);
 	return o;
 }
