@@ -19,7 +19,7 @@ void gradoSeparacion(string& origen) {
     
     GrafoNombres pelis("movies.txt", "/");
     
-    
+    /*
     cout << "Escriba el nombre del actor: ";
     
     getline(cin, origen);
@@ -45,6 +45,7 @@ void gradoSeparacion(string& origen) {
     }
     
     if ( MANUAL_DEBUG ) cout << "fuera del bucle" << endl;
+     */
     
 }
 

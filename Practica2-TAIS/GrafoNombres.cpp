@@ -7,26 +7,42 @@
 //
 
 #include "GrafoNombres.h"
+#include "SplitString.h"
+#include "Tabla.h"
+#include "Lista.h"
 
 using namespace std;
 
     GrafoNombres::GrafoNombres(string filename, string delimiter) {
         
-        string linea = read(filename);
-
-        cout << linea;
-//        int numeroVertices = 0;
+//        string a[] = {"1","2", "3", "4", "5", "6", "7", "8", "9", "10"};
+//        string b[] = {"11","12", "13", "14", "15", "16", "17", "18", "19", "20"};
 //        
-//        for ( int i = 1; i < numeroVertices; i++) {
-//            string cadena = "";
-//            
-//            tn.inserta(cadena, i);
+//        string* pa = a;
+//        string* pb = b;
+//        
+//        for (int j = 0; j< 20 ; j++) {
+//            if ( j< 10)
+//                cout << a[j] << " ";
+//            else
+//                cout << b[j-10] << " ";
 //        }
+//        
+//        string* c = copiarArray(pa, 10, pb, 10);
+//        
+//        for ( int h = 0; h < 20; h++) {
+//            cout << c[h] << " ";
+//        }
+        
+        Tabla<string, Lista<string>> tablaPelisActores = read(filename, delimiter);
     }
     
     GrafoNombres::~GrafoNombres() {
-//        delete _G;
-//        delete nombres;
+        
+        if ( _G != NULL )
+            delete _G;
+        if ( nombres != NULL )
+            delete nombres;
     }
     
     bool GrafoNombres::contiene(string s) const {
@@ -44,26 +60,76 @@ using namespace std;
         return nombres[v];
     }
 
-    const Grafo& GrafoNombres::G() const {
+    const Grafo* GrafoNombres::G() const {
         
-        return Grafo(0,0);
+        return _G;
     }
 
-    string GrafoNombres::read(const string& file) {
+    Tabla<string, Lista<string>>& GrafoNombres::read(const string& file, const string& delimiter) {
         
-        string cadenaLeida = "";
+        Tabla<string, Lista<string>> pelisActores;
         
         ifstream inputFile;
         inputFile.open( file );
         
         if ( inputFile.is_open() )  {
             
-//            while ( getline(inputFile, cadenaLeida) ) { std::cout << cadenaLeida << std::endl; }
+            string cadenaLeida;
             
-            getline(inputFile, cadenaLeida);
+            while ( getline(inputFile, cadenaLeida) ) {
+                
+                int sizeLine;
+                
+                string* partesCadenaLeida = partes(cadenaLeida, sizeLine);
+                
+                cout << "++Peli añadir:" << partesCadenaLeida[0] << endl;
+                
+                Lista<string> actores;
+                for ( int i = 1; i < sizeLine; i++) {
+                    actores.ponDr(partesCadenaLeida[i]);
+                }
+                
+                cout << "--Lista de actores de peli creada:" << partesCadenaLeida[0] << endl;
+                
+                pelisActores.inserta(partesCadenaLeida[0], actores);
+                
+                cout << "**Pelia añadida:" << partesCadenaLeida[0] << endl;
+            }
             
             inputFile.close();
         }
         
-        return cadenaLeida;
+        return pelisActores;
+    }
+
+    string* GrafoNombres::partes(const string& cadena, int& outsize) {
+        
+        string* partes = split(cadena, "/", outsize);
+        
+        return partes;
+    }
+
+    string* GrafoNombres::copiarArray(const string* destino, const int tamDestino, const string* origen, const int tamOrigen) {
+        
+        int tamTotal = tamDestino + tamOrigen;
+        
+        string* nuevoArray = new string[tamTotal];
+        
+        int i = 0;
+        while( i < tamDestino ) {
+            
+            nuevoArray[i] = destino[i];
+            
+            i++;
+        }
+        
+        int z = 0;
+        for ( int j = i; j < (tamTotal) ; j++ ) {
+            
+            nuevoArray[j] = origen[z];
+            
+            z++;
+        }
+        
+        return nuevoArray;
     }

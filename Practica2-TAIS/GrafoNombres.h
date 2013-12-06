@@ -35,9 +35,12 @@ public:
     
     const string& nombre(int v) const;  // devuelve el nombre asociado al número v
     
-    const Grafo& G() const;             // devuelve el grafo de números
+    const Grafo* G() const;             // devuelve el grafo de números
     
-    string read(const string& file);
+private:
+    Tabla<string, Lista<string>>& read(const string& file, const string& delimiter);
+    string* partes(const string& cadena, int& outsize);
+    string* copiarArray(const string* destino, const int tamDestino, const string* origen, const int tamOrigen);
 };
 
 #endif /* defined(GrafoNombres_H_) */
