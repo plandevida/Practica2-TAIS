@@ -22,24 +22,24 @@ class GrafoNombres {
 private:
     Tabla<string, uint> tn;  // string -> index
     string* nombres;         // index  -> string
-    Grafo* _G;               // grafo con veÌrtices numerados
+    Grafo* _G;               // grafo con veÌ?rtices numerados
     
 public:
     GrafoNombres(string filename, string delimiter);
     
     ~GrafoNombres();
     
-    bool contiene(string s) const;      // existe un veÌrtice de nombre s?
+    bool contiene(string s) const;      // existe un veÌ?rtice de nombre s?
     
-    int indice(string s) const;        // devuelve el nuÌmero asociado al veÌrtices
+    int indice(string s) const;        // devuelve el nuÌ?mero asociado al veÌ?rtices
     
-    const string& nombre(int v) const;  // devuelve el nombre asociado al nuÌmero v
+    const string& nombre(int v) const;  // devuelve el nombre asociado al nuÌ?mero v
     
-    const Grafo* G() const;             // devuelve el grafo de nuÌmeros
+    const Grafo* G() const;             // devuelve el grafo de nuÌ?meros
     
 private:
     void crearGrafo(const string& file, const string& delimiter);
-    void read(const string& file, const string& delimiter, int& numVerticesOut, Tabla<string, Lista<string>> aristasOut);
+    void read(const string& file, const string& delimiter, int& numVerticesOut, Tabla<string, Lista<string> > aristasOut);
     string* partes(const string& cadena, int& outsize);
 };
 

@@ -7,7 +7,7 @@
 //
 
 #include "GrafoNombres.h"
-#include "SplitString.h"
+#include "SplitString/SplitString.h"
 #include "Tabla.h"
 #include "Lista.h"
 
@@ -46,7 +46,7 @@ const Grafo* GrafoNombres::G() const {
 
 void GrafoNombres::crearGrafo(const string& filename, const string& delimiter) {
     
-    Tabla<string, Lista<string>> tablaAristas;
+    Tabla<string, Lista<string> > tablaAristas;
     int vertices = 0;
     
     // Lectura del fichero de peliculas-actores
@@ -73,7 +73,7 @@ void GrafoNombres::crearGrafo(const string& filename, const string& delimiter) {
     _G = new Grafo(vertices, 0);
     
     // Añado las aristas al grafo.
-    Tabla<string, Lista<string>>::Iterador itTablaAristas = tablaAristas.principio();
+    Tabla<string, Lista<string> >::Iterador itTablaAristas = tablaAristas.principio();
     while ( itTablaAristas != tablaAristas.final() ) {
         
         string nombrePelicula = itTablaAristas.clave();
@@ -104,9 +104,9 @@ void GrafoNombres::crearGrafo(const string& filename, const string& delimiter) {
     }
 }
 
-void GrafoNombres::read(const string& file, const string& delimiter, int& numVerticesOut, Tabla<string, Lista<string>> aristasOut) {
+void GrafoNombres::read(const string& file, const string& delimiter, int& numVerticesOut, Tabla<string, Lista<string> > aristasOut) {
     
-    Tabla<string, Lista<string>> pelisActores;
+    Tabla<string, Lista<string> > pelisActores;
     
     ifstream inputFile;
     inputFile.open( file );

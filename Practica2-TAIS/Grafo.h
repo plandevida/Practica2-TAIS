@@ -10,6 +10,7 @@
 
 #include <fstream>
 #include <limits>
+#include <cstdlib>
 using namespace std;
 
 #include "Lista.h"
@@ -84,18 +85,18 @@ public:
 	}
 
 	/**
-	 * Devuelve el número de vertices del grafo.
+	 * Devuelve el n≈ìmero de vertices del grafo.
 	 */
 	uint V() const { return _V; }
 
 	/**
-	 * Devuelve el número de aristas del grafo.
+	 * Devuelve el n≈ìmero de aristas del grafo.
 	 */
 	uint E() const { return _E; }
 
 	/**
-	 * Añade la arista v-w al grafo.
-	 * @throws VerticeInexistente si algún vertice no existe
+	 * A‚Äìade la arista v-w al grafo.
+	 * @throws VerticeInexistente si alg≈ìn vertice no existe
 	 */
 	void ponArista(uint v, uint w) {
 		if (v >= _V || w >= _V) throw VerticeInexistente();
@@ -143,7 +144,7 @@ private:
 };
 
 /**
- * Para mostrar grafos por la salida est·ndar.
+ * Para mostrar grafos por la salida est√°ndar.
  */
 
 inline ostream& operator<<(ostream& o,const Grafo& g){
