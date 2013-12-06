@@ -38,9 +38,9 @@ public:
     const Grafo* G() const;             // devuelve el grafo de números
     
 private:
-    Tabla<string, Lista<string>>& read(const string& file, const string& delimiter);
+    void crearGrafo(const string& file, const string& delimiter);
+    void read(const string& file, const string& delimiter, int& numVerticesOut, Tabla<string, Lista<string>> aristasOut);
     string* partes(const string& cadena, int& outsize);
-    string* copiarArray(const string* destino, const int tamDestino, const string* origen, const int tamOrigen);
 };
 
 #endif /* defined(GrafoNombres_H_) */
