@@ -17,7 +17,7 @@ const bool MANUAL_DEBUG = false;
 
 void gradoSeparacion(string& origen) {
     
-    GrafoNombres pelis("movies.txt", "/");
+    GrafoNombres pelis("moviesModificado.txt", "/");
     
     /*
     cout << "Escriba el nombre del actor: ";

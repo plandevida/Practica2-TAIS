@@ -21,7 +21,7 @@ GrafoNombres::GrafoNombres(string filename, string delimiter) {
 GrafoNombres::~GrafoNombres() {
     
         delete _G;
-        delete nombres;
+//        delete nombres;
 }
 
 bool GrafoNombres::contiene(string s) const {
@@ -49,10 +49,13 @@ void GrafoNombres::crearGrafo(const string& filename, const string& delimiter) {
     Tabla<string, Lista<string>> tablaAristas;
     int vertices = 0;
     
+    // Lectura del fichero de peliculas-actores
     read(filename, delimiter, vertices, tablaAristas);
     
-    nombres = new string[vertices];
+    // Creo el vector de relación número de vertice - nombre
+    GrafoNombres::nombres = new string[vertices];
     
+    // Asigo los id - nombre en el vector nombres.
     Tabla<string, uint>::Iterador itTablaNombres = tn.principio();
     while ( itTablaNombres != tn.final() ) {
         
@@ -60,10 +63,16 @@ void GrafoNombres::crearGrafo(const string& filename, const string& delimiter) {
         uint numVertice = itTablaNombres.valor();
         
         nombres[numVertice] = nombre;
+        
+        itTablaNombres.avanza();
     }
+    
+    cout << "pasa" << endl;
+    cout << "prueba nombres " << nombres [0] << " " << nombres[1] << endl;
     
     _G = new Grafo(vertices, 0);
     
+    // Añado las aristas al grafo.
     Tabla<string, Lista<string>>::Iterador itTablaAristas = tablaAristas.principio();
     while ( itTablaAristas != tablaAristas.final() ) {
         
