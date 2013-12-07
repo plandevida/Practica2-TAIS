@@ -38,9 +38,8 @@ public:
     const Grafo* G() const;             // devuelve el grafo de nuÌ?meros
     
 private:
-    void crearGrafo(const string& file, const string& delimiter);
-    void read(const string& file, const string& delimiter, int& numVerticesOut, Tabla<string, Lista<string> > aristasOut);
-    string* partes(const string& cadena, int& outsize);
+	bool readNumeroVertices(const string& file, const string& delimiter, int& numVerticesOut);
+	bool readAristas(const string& file, const string& delimiter);
 };
 
 #endif /* defined(GrafoNombres_H_) */

@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 zombies-software. All rights reserved.
 //
 
+#include <limits>
 #include "GrafoNombres.h"
 #include "SplitString/SplitString.h"
 #include "Tabla.h"
@@ -14,24 +15,51 @@
 using namespace std;
 
 GrafoNombres::GrafoNombres(string filename, string delimiter) {
-    
-    crearGrafo(filename, delimiter);
+
+	int numeroV = 0;
+
+	bool errorLectura = readNumeroVertices(filename, delimiter, numeroV);
+
+	if (errorLectura) {
+		cout << "WARNIGN --> Error al leer el fichero o no se ha encontrado " << endl;
+	}
+	else {
+
+		nombres = new string[numeroV];
+
+		// Asigno los id - nombre en el vector nombres.
+		Tabla<string, uint>::Iterador itTablaNombres = tn.principio();
+		while (itTablaNombres != tn.final()) {
+
+			string nombre = itTablaNombres.clave();
+			uint numVertice = itTablaNombres.valor();
+
+			nombres[numVertice] = nombre;
+
+			itTablaNombres.avanza();
+		}
+
+		_G = new Grafo(numeroV);
+
+		// Se crean las aristas del grafo
+		readAristas(filename, delimiter);
+	}
 }
 
 GrafoNombres::~GrafoNombres() {
-    
-        delete _G;
-//        delete nombres;
+	
+    delete _G;
+	delete[] nombres;
 }
 
 bool GrafoNombres::contiene(string s) const {
-    
-    return tn.esta(s);
+
+	return tn.esta(s);
 }
 
 int GrafoNombres::indice(string s) const {
-    
-    return tn.consulta(s);
+
+	return tn.consulta(s);
 }
 
 const string& GrafoNombres::nombre(int v) const {
@@ -44,118 +72,102 @@ const Grafo* GrafoNombres::G() const {
     return _G;
 }
 
-void GrafoNombres::crearGrafo(const string& filename, const string& delimiter) {
-    
-    Tabla<string, Lista<string> > tablaAristas;
-    int vertices = 0;
-    
-    // Lectura del fichero de peliculas-actores
-    read(filename, delimiter, vertices, tablaAristas);
-    
-    // Creo el vector de relación número de vertice - nombre
-    GrafoNombres::nombres = new string[vertices];
-    
-    // Asigo los id - nombre en el vector nombres.
-    Tabla<string, uint>::Iterador itTablaNombres = tn.principio();
-    while ( itTablaNombres != tn.final() ) {
-        
-        string nombre = itTablaNombres.clave();
-        uint numVertice = itTablaNombres.valor();
-        
-        nombres[numVertice] = nombre;
-        
-        itTablaNombres.avanza();
-    }
-    
-    cout << "pasa" << endl;
-    cout << "prueba nombres " << nombres [0] << " " << nombres[1] << endl;
-    
-    _G = new Grafo(vertices, 0);
-    
-    // Añado las aristas al grafo.
-    Tabla<string, Lista<string> >::Iterador itTablaAristas = tablaAristas.principio();
-    while ( itTablaAristas != tablaAristas.final() ) {
-        
-        string nombrePelicula = itTablaAristas.clave();
-        
-        if ( tn.esta(nombrePelicula) ) {
-            
-            int numeroVerticePelicula = tn.consulta(nombrePelicula);
-            
-            Lista<string> actoresPelicula = itTablaAristas.valor();
-            
-            Lista<string>::Iterador itListaActores = actoresPelicula.principio();
-            while ( itListaActores != actoresPelicula.final() ) {
-                
-                string nombreActor = itListaActores.elem();
-                
-                if( tn.esta(nombreActor) ) {
-                
-                    int numeroVerticeActor = tn.consulta(nombreActor);
-                
-                    _G->ponArista(numeroVerticePelicula, numeroVerticeActor);
-                }
-                
-                itListaActores.avanza();
-            }
-        }
-        
-        itTablaAristas.avanza();
-    }
+bool GrafoNombres::readNumeroVertices(const string& file, const string& delimiter, int& numVerticesOut) {
+
+	bool error = false;
+
+	ifstream inputFile;
+	inputFile.open(file);
+
+	if (inputFile.is_open())  {
+
+		string cadenaLeida;
+
+		while (getline(inputFile, cadenaLeida)) {
+
+			if (cadenaLeida != "" && !inputFile.eof()) {
+				int sizeLine;
+
+				string* partesCadenaLeida = split(cadenaLeida, delimiter, sizeLine);
+
+				string pelicula = partesCadenaLeida[0];
+
+				if (!tn.esta(pelicula)) {
+					tn.inserta(pelicula, numVerticesOut);
+
+					// aumento el número de vertices
+					numVerticesOut++;
+				}
+
+				for (int i = 1; i < sizeLine; i++) {
+					string actor = partesCadenaLeida[i];
+
+					if (!tn.esta(actor)) {
+						tn.inserta(actor, numVerticesOut);
+
+						// aumento el número de vertices
+						numVerticesOut++;
+					}
+				}
+			}
+		}
+
+		inputFile.close();
+	}
+	else {
+		error = true;
+	}
+
+	return error;
 }
 
-void GrafoNombres::read(const string& file, const string& delimiter, int& numVerticesOut, Tabla<string, Lista<string> > aristasOut) {
-    
-    Tabla<string, Lista<string> > pelisActores;
-    
-    ifstream inputFile;
-    inputFile.open( file );
-    
-    if ( inputFile.is_open() )  {
-        
-        string cadenaLeida;
-        
-        while ( getline(inputFile, cadenaLeida) ) {
-            
-            if ( cadenaLeida != "" && !inputFile.eof()) {
-                int sizeLine;
-                
-                string* partesCadenaLeida = partes(cadenaLeida, sizeLine);
-                
-                string pelicula = partesCadenaLeida[0];
-                
-                if( !tn.esta(pelicula) ) {
-                    tn.inserta(pelicula, numVerticesOut);
-                    
-                    // aumento el número de vertices
-                    numVerticesOut++;
-                }
-                
-                Lista<string> actores;
-                for ( int i = 1; i < sizeLine; i++) {
-                    string actor = partesCadenaLeida[i];
-                    
-                    if( !tn.esta(actor) ) {
-                        tn.inserta(actor, numVerticesOut);
-                        
-                        actores.ponDr(actor);
-                        
-                        // aumento el número de vertices
-                        numVerticesOut++;
-                    }
-                }
-                
-                aristasOut.inserta(pelicula, actores);
-            }
-        }
-        
-        inputFile.close();
-    }
+bool GrafoNombres::readAristas(const string& file, const string& delimiter) {
+
+	bool error = false;
+
+	ifstream inputFile;
+	inputFile.open(file);
+
+	if (inputFile.is_open())  {
+
+		string cadenaLeida;
+
+		while (getline(inputFile, cadenaLeida)) {
+
+			if (cadenaLeida != "" && !inputFile.eof()) {
+				int sizeLine;
+
+				string* partesCadenaLeida = split(cadenaLeida, delimiter, sizeLine);
+
+				string pelicula = partesCadenaLeida[0];
+
+				int indicePelicula = -1;
+
+				if ( tn.esta(pelicula) ) {
+					indicePelicula = tn.consulta(pelicula);
+				}
+
+				if ( indicePelicula != -1 ) {
+
+					for (int i = 1; i < sizeLine; i++) {
+
+						string actor = partesCadenaLeida[i];
+
+						if (tn.esta(actor)) {
+
+							_G->ponArista(indicePelicula, tn.consulta(actor));
+						}
+					}
+				}
+			}
+		}
+
+		inputFile.close();
+	}
+	else {
+		error = true;
+	}
+
+	return error;
 }
 
-string* GrafoNombres::partes(const string& cadena, int& outsize) {
-    
-    string* partes = split(cadena, "/", outsize);
-    
-    return partes;
-}
