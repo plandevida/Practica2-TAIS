@@ -144,8 +144,6 @@ void numerosActor(const string& origen) {
 
 				if (numeroBacon < 10) {
 
-					//cout << "Distancia: " << distancia << " actor: " << grafo.nombre(i) << endl;
-
 					actoresNumero[numeroBacon] += 1;
 				}
 				else {
