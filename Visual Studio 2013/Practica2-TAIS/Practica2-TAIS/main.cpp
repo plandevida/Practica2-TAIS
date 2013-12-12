@@ -25,7 +25,9 @@ void obtieneDatos(const string& actorOrigen, const string& actorDestino, const G
 	if (indiceActorOrigen != -1) {
 		const Grafo* g = grafo.G();
 
-		DepthFirstPaths dfpO(*g, indiceActorOrigen);
+		//DepthFirstPaths dfpO(*g, indiceActorOrigen);
+
+		BreadthFirstPaths bfp(*g, indiceActorOrigen);
 
 		int indiceActorDestino = -1;
 
@@ -35,9 +37,9 @@ void obtieneDatos(const string& actorOrigen, const string& actorDestino, const G
 
 		if (indiceActorDestino != -1) {
 
-			if ( dfpO.hasPathTo(indiceActorDestino) ) {
+			if ( bfp.hasPathTo(indiceActorDestino) ) {
 
-				BreadthFirstPaths bfp(*g, indiceActorOrigen);
+				//BreadthFirstPaths bfp(*g, indiceActorOrigen);
 
 				int grado = bfp.distance(indiceActorDestino) / 2;
 
