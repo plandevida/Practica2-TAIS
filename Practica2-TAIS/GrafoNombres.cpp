@@ -109,6 +109,8 @@ bool GrafoNombres::readNumeroVertices(const string& file, const string& delimite
 						numVerticesOut++;
 					}
 				}
+
+				delete[] partesCadenaLeida;
 			}
 		}
 
@@ -159,6 +161,8 @@ bool GrafoNombres::readAristas(const string& file, const string& delimiter) {
 						}
 					}
 				}
+
+				delete[] partesCadenaLeida;
 			}
 		}
 

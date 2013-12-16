@@ -25,7 +25,7 @@ void obtieneDatos(const string& actorOrigen, const string& actorDestino, const G
 	if (indiceActorOrigen != -1) {
 		const Grafo* g = grafo.G();
 
-		DepthFirstPaths dfpO(*g, indiceActorOrigen);
+		BreadthFirstPaths bfp(*g, indiceActorOrigen);
 
 		int indiceActorDestino = -1;
 
@@ -35,9 +35,7 @@ void obtieneDatos(const string& actorOrigen, const string& actorDestino, const G
 
 		if (indiceActorDestino != -1) {
 
-			if ( dfpO.hasPathTo(indiceActorDestino) ) {
-
-				BreadthFirstPaths bfp(*g, indiceActorOrigen);
+			if ( bfp.hasPathTo(indiceActorDestino) ) {
 
 				int grado = bfp.distance(indiceActorDestino) / 2;
 
@@ -143,8 +141,6 @@ void numerosActor(const string& origen) {
 				int numeroBacon = distancia / 2;
 
 				if (numeroBacon < 10) {
-
-					//cout << "Distancia: " << distancia << " actor: " << grafo.nombre(i) << endl;
 
 					actoresNumero[numeroBacon] += 1;
 				}
